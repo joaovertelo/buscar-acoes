@@ -11,12 +11,14 @@ class AutoComplete extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {};
+		this.state = { isLoading: false };
 	}
 
 	loadOptions = (inputValue, callback) => {
+		this.setState({ isLoading: true });
 		let options = this.props.getOptions(inputValue);
 		callback(options);
+		this.setState({ isLoading: false });
 	};
 
 	render() {
@@ -26,6 +28,8 @@ class AutoComplete extends Component {
 				defaultOptions={this.props.defaultOptions}
 				loadOptions={this.loadOptions}
 				onChange={this.props.onChange}
+				placeholder="Selecione..."
+				isLoading={this.state.isLoading}
 			/>
 		);
 	}
