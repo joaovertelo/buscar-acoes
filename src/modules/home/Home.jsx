@@ -54,7 +54,7 @@ class Home extends Component {
 							</div>
 							<div className="col-sm-6">
 								<FormGroup>
-									<ControlLabel className="font-weight-bold">Último preço</ControlLabel>
+									<ControlLabel className="font-weight-bold">Preço</ControlLabel>
 									<FormControl.Static>${latestPrice}</FormControl.Static>
 								</FormGroup>
 							</div>
