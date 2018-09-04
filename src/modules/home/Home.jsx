@@ -1,40 +1,53 @@
 import React, { Component } from 'react';
-
-import API from '../../API';
+import { connect } from 'react-redux';
 
 import { AutoComplete } from '../../components/form';
+
+import { getSymbols, onChangeSelect } from './homeActions';
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			data: []
-		};
+		this.getOptions = this.getOptions.bind(this);
+		this.state = {};
 	}
 
 	componentDidMount() {
-		API.get(`/ref-data/symbols`).then((resp) => {
-			this.setState({
-				data: resp.data.slice(1, 10).map((obj) => {
-					return { value: obj.iexId, label: obj.name };
-				})
-			});
-		});
+		this.props.getSymbols();
+	}
+
+	getOptions(value) {
+		let symbols = this.props.symbols;
+		symbols = symbols
+			.filter(
+				(o) =>
+					o.value.toUpperCase().includes(value.toUpperCase()) ||
+					o.label.toUpperCase().includes(value.toUpperCase())
+			)
+			.slice(0, 20);
+
+		return symbols;
 	}
 
 	render() {
+		const { onChangeSelect, symbols } = this.props;
 		return (
 			<div className="App-intro">
-				<AutoComplete options={this.state.data} />
-				{/* {this.state.data.map((obj, i) => (
-					<p key={i}>
-						{obj.symbol} - {obj.name}{' '}
-					</p>
-				))} */}
+				<AutoComplete
+					defaultOptions={symbols.slice(0, 20)}
+					getOptions={this.getOptions}
+					onChange={onChangeSelect}
+				/>
 			</div>
 		);
 	}
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+	symbols: state.homeReducer.symbols,
+	value: state.homeReducer.value
+});
+
+const mapDispatchToProps = { getSymbols, onChangeSelect };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

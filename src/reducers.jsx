@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import globalReducer from './modules/global/globalReducer';
-const reducers = combineReducers({ globalReducer });
+import homeReducer from './modules/home/homeReducer';
+const reducers = combineReducers({ globalReducer, homeReducer });
 
 export default reducers;
