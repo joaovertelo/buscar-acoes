@@ -32,12 +32,16 @@ class Home extends Component {
 	render() {
 		const { onChangeSelect, symbols } = this.props;
 		return (
-			<div className="row col-lg-6">
-				<AutoComplete
-					defaultOptions={symbols.slice(0, 20)}
-					getOptions={this.getOptions}
-					onChange={onChangeSelect}
-				/>
+			<div className="container">
+				<div className="row">
+					<div className="col-sm-12">
+						<AutoComplete
+							defaultOptions={symbols.slice(0, 20)}
+							getOptions={this.getOptions}
+							onChange={onChangeSelect}
+						/>
+					</div>
+				</div>
 			</div>
 		);
 	}
