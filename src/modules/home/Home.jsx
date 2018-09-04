@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
 import { AutoComplete } from '../../components/form';
 
@@ -30,10 +31,10 @@ class Home extends Component {
 	}
 
 	render() {
-		const { onChangeSelect, symbols } = this.props;
+		const { onChangeSelect, symbols, company, latestPrice } = this.props;
 		return (
 			<div className="container">
-				<div className="row">
+				<div className="row mb-3">
 					<div className="col-sm-12">
 						<AutoComplete
 							defaultOptions={symbols.slice(0, 20)}
@@ -42,6 +43,24 @@ class Home extends Component {
 						/>
 					</div>
 				</div>
+				{company && (
+					<div>
+						<div className="row m-t-10">
+							<div className="col-sm-6">
+								<FormGroup>
+									<ControlLabel className="font-weight-bold">Empresa</ControlLabel>
+									<FormControl.Static>{company.companyName}</FormControl.Static>
+								</FormGroup>
+							</div>
+							<div className="col-sm-6">
+								<FormGroup>
+									<ControlLabel className="font-weight-bold">Último preço</ControlLabel>
+									<FormControl.Static>${latestPrice}</FormControl.Static>
+								</FormGroup>
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 		);
 	}
@@ -49,7 +68,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
 	symbols: state.homeReducer.symbols,
-	value: state.homeReducer.value
+	value: state.homeReducer.value,
+	company: state.homeReducer.company,
+	latestPrice: state.homeReducer.latestPrice
 });
 
 const mapDispatchToProps = { getSymbols, onChangeSelect };
