@@ -56,7 +56,7 @@ export function getChart(symbol, range = '1d') {
 			console.log(resp.data);
 			dispatch({
 				type: GET_CHART,
-				payload: resp.data
+				payload: { data: resp.data, range }
 			});
 		});
 	};

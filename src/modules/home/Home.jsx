@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { AutoComplete } from '../../components/form';
 import Detalhes from './Detalhes';
 import Chart from './Chart';
+import Paginacao from './Paginacao';
+import { Row, Col } from '../../common';
 
-import { getSymbols, onChangeSelect } from './homeActions';
+import { getSymbols, onChangeSelect, getChart } from './homeActions';
 
 class Home extends Component {
 	constructor(props) {
@@ -38,19 +40,21 @@ class Home extends Component {
 
 		return (
 			<div className="container">
-				<div className="row mb-4">
-					<div className="col-sm-12">
+				<Row>
+					<Col>
 						<AutoComplete
 							defaultOptions={symbols.slice(0, 20)}
 							getOptions={this.getOptions}
 							onChange={onChangeSelect}
 						/>
-					</div>
-				</div>
+					</Col>
+				</Row>
+
 				<Detalhes company={company} quote={quote} />
-				<div className="row" style={{ height: 300 }}>
+				{company && company.symbol && <Paginacao symbol={company.symbol} />}
+				<Row style={{ height: 300 }}>
 					<Chart data={chart} />
-				</div>
+				</Row>
 			</div>
 		);
 	}
@@ -64,6 +68,6 @@ const mapStateToProps = (state) => ({
 	chart: state.homeReducer.chart
 });
 
-const mapDispatchToProps = { getSymbols, onChangeSelect };
+const mapDispatchToProps = { getSymbols, onChangeSelect, getChart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

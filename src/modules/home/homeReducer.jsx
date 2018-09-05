@@ -13,12 +13,11 @@ export default (state = initialState, action) => {
 		case GET_COMPANY:
 			return { ...state, company: action.payload };
 		case GET_CHART:
-			let chart = action.payload;
+			let chart = action.payload.data;
 			chart = chart
 				.map((o) => ({
-					name: o.label,
-					label: o.label,
-					valor: o.marketClose
+					name: action.payload.range === '1d' ? o.label : o.date,
+					valor: o.close
 				}))
 				.filter((o) => o.valor);
 

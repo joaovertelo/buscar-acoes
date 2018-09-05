@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
+import { Row, Col } from '../../common';
 
 class Detalhes extends Component {
 	render() {
@@ -9,54 +10,54 @@ class Detalhes extends Component {
 			<div>
 				{company &&
 				quote && (
-					<div>
-						<div className="row">
-							<div className="col">
+					<div className="mt-4">
+						<Row>
+							<Col>
 								<FormGroup>
 									<ControlLabel className="font-weight-bold">
 										{company.companyName} ({company.symbol})
 									</ControlLabel>
 								</FormGroup>
-							</div>
-							<div className="col">
+							</Col>
+
+							<Col>
 								<FormGroup>
 									<ControlLabel className="font-weight-bold">
 										${quote && quote.latestPrice}
 									</ControlLabel>
 									<ControlLabel className="small"> ({quote && quote.change})</ControlLabel>
 								</FormGroup>
-							</div>
-							<div className="col" />
-						</div>
-						<div className="row">
-							<div className="col">
+							</Col>
+							<Col />
+						</Row>
+
+						<Row>
+							<Col>
 								<FormGroup>
 									<FormControl.Static>{company.description}</FormControl.Static>
 								</FormGroup>
-							</div>
-						</div>
-						<div className="row">
-							<div className="col" />
-						</div>
-						<div className="row">
+							</Col>
+						</Row>
+
+						<Row>
 							{company.CEO && (
-								<div className="col">
+								<Col>
 									<FormGroup>
 										<ControlLabel className="font-weight-bold">CEO</ControlLabel>
 										<FormControl.Static>{company.CEO}</FormControl.Static>
 									</FormGroup>
-								</div>
+								</Col>
 							)}
 							{company.industry && (
-								<div className="col">
+								<Col>
 									<FormGroup>
 										<ControlLabel className="font-weight-bold">Ramo</ControlLabel>
 										<FormControl.Static>{company.industry}</FormControl.Static>
 									</FormGroup>
-								</div>
+								</Col>
 							)}
 							{company.website && (
-								<div className="col">
+								<Col>
 									<FormGroup>
 										<ControlLabel className="font-weight-bold">Site</ControlLabel>
 										<FormControl.Static>
@@ -65,9 +66,9 @@ class Detalhes extends Component {
 											</a>
 										</FormControl.Static>
 									</FormGroup>
-								</div>
+								</Col>
 							)}
-						</div>
+						</Row>
 					</div>
 				)}
 			</div>
