@@ -1,4 +1,4 @@
-import { GET_SYMBOLS, ON_CHANGE_SELECT, GET_COMPANY, GET_CHART, GET_LATEST_PRICE, CLEAR } from './homeActions';
+import { GET_SYMBOLS, ON_CHANGE_SELECT, GET_COMPANY, GET_CHART, GET_QUOTE, CLEAR } from './homeActions';
 
 const initialState = {
 	symbols: []
@@ -13,9 +13,18 @@ export default (state = initialState, action) => {
 		case GET_COMPANY:
 			return { ...state, company: action.payload };
 		case GET_CHART:
-			return { ...state, chart: action.payload };
-		case GET_LATEST_PRICE:
-			return { ...state, latestPrice: action.payload };
+			let chart = action.payload;
+			chart = chart
+				.map((o) => ({
+					name: o.label,
+					label: o.label,
+					valor: o.marketClose
+				}))
+				.filter((o) => o.valor);
+
+			return { ...state, chart: chart };
+		case GET_QUOTE:
+			return { ...state, quote: action.payload };
 		case CLEAR:
 			return { symbols: state.symbols };
 		default:

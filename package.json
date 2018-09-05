@@ -15,6 +15,7 @@
 		"react-router-dom": "^4.3.1",
 		"react-scripts": "1.1.5",
 		"react-select": "^2.0.0",
+		"recharts": "^1.1.0",
 		"redux": "^4.0.0",
 		"redux-multi": "^0.1.12",
 		"redux-promise": "^0.6.0",

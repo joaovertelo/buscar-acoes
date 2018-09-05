@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap';
 
 import { AutoComplete } from '../../components/form';
+import Detalhes from './Detalhes';
+import Chart from './Chart';
 
 import { getSymbols, onChangeSelect } from './homeActions';
 
@@ -10,7 +11,9 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.getOptions = this.getOptions.bind(this);
-		this.state = {};
+		this.state = {
+			chart: []
+		};
 	}
 
 	componentDidMount() {
@@ -31,10 +34,11 @@ class Home extends Component {
 	}
 
 	render() {
-		const { onChangeSelect, symbols, company, latestPrice } = this.props;
+		const { onChangeSelect, symbols, company, quote, chart } = this.props;
+
 		return (
 			<div className="container">
-				<div className="row mb-3">
+				<div className="row mb-4">
 					<div className="col-sm-12">
 						<AutoComplete
 							defaultOptions={symbols.slice(0, 20)}
@@ -43,24 +47,10 @@ class Home extends Component {
 						/>
 					</div>
 				</div>
-				{company && (
-					<div>
-						<div className="row m-t-10">
-							<div className="col-sm-6">
-								<FormGroup>
-									<ControlLabel className="font-weight-bold">Empresa</ControlLabel>
-									<FormControl.Static>{company.companyName}</FormControl.Static>
-								</FormGroup>
-							</div>
-							<div className="col-sm-6">
-								<FormGroup>
-									<ControlLabel className="font-weight-bold">Preço</ControlLabel>
-									<FormControl.Static>${latestPrice}</FormControl.Static>
-								</FormGroup>
-							</div>
-						</div>
-					</div>
-				)}
+				<Detalhes company={company} quote={quote} />
+				<div className="row" style={{ height: 300 }}>
+					<Chart data={chart} />
+				</div>
 			</div>
 		);
 	}
@@ -70,7 +60,8 @@ const mapStateToProps = (state) => ({
 	symbols: state.homeReducer.symbols,
 	value: state.homeReducer.value,
 	company: state.homeReducer.company,
-	latestPrice: state.homeReducer.latestPrice
+	quote: state.homeReducer.quote,
+	chart: state.homeReducer.chart
 });
 
 const mapDispatchToProps = { getSymbols, onChangeSelect };

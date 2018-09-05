@@ -4,7 +4,7 @@ export const GET_SYMBOLS = 'GET_SYMBOLS';
 export const ON_CHANGE_SELECT = 'ON_CHANGE_SELECT';
 export const GET_COMPANY = 'GET_COMPANY';
 export const GET_CHART = 'GET_CHART';
-export const GET_LATEST_PRICE = 'GET_LATEST_PRICE';
+export const GET_QUOTE = 'GET_QUOTE';
 export const CLEAR = 'CLEAR';
 
 export function getSymbols() {
@@ -35,14 +35,13 @@ export function onChangeSelect(symbol) {
 		},
 		getCompany(symbol),
 		getChart(symbol),
-		getLatestPrice(symbol)
+		getQuote(symbol)
 	];
 }
 
 export function getCompany(symbol) {
 	return (dispatch) => {
 		API.get(`/stock/${symbol}/company`).then((resp) => {
-			console.log(resp);
 			dispatch({
 				type: GET_COMPANY,
 				payload: resp.data
@@ -51,10 +50,10 @@ export function getCompany(symbol) {
 	};
 }
 
-export function getChart(symbol) {
+export function getChart(symbol, range = '1d') {
 	return (dispatch) => {
-		API.get(`/stock/${symbol}/chart`).then((resp) => {
-			console.log(resp);
+		API.get(`/stock/${symbol}/chart/${range}`).then((resp) => {
+			console.log(resp.data);
 			dispatch({
 				type: GET_CHART,
 				payload: resp.data
@@ -63,12 +62,12 @@ export function getChart(symbol) {
 	};
 }
 
-export function getLatestPrice(symbol) {
+export function getQuote(symbol) {
 	return (dispatch) => {
 		API.get(`/stock/${symbol}/quote`).then((resp) => {
 			dispatch({
-				type: GET_LATEST_PRICE,
-				payload: resp.data.latestPrice
+				type: GET_QUOTE,
+				payload: resp.data
 			});
 		});
 	};
