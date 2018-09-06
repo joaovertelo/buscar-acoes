@@ -1,4 +1,4 @@
-*Para executar o projeto, instalar as dependencias com [npm install] e após as dependências instaladas rodar [npm start] e acessar [localhost](http://localhost:3000).
+* Para executar o projeto, instalar as dependencias com `npm install` e após as dependências instaladas rodar `npm start` e acessar [localhost](http://localhost:3000).
 
 
 # Teste para Engenheiro de Software
