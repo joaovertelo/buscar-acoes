@@ -1,3 +1,6 @@
+*Para executar o projeto, instalar as dependencias com [npm install] e após as dependências instaladas rodar [npm start] e acessar [localhost](http://localhost:3000).
+
+
 # Teste para Engenheiro de Software
 
 O teste consiste em utilizar React para uma simples aplicação que exibe o valor de ações através de chamadas de API. Crie uma tela apenas com um input de texto que receberá um símbolo de ação (ex: aapl para Apple, fb para Facebook, twtr para Twitter) e retornará o último valor de ação da empresa, assim como outras informações relevantes. Sinta-se livre para utilizar quaisquer dependências que você desejar no npm e auxiliar no desenvolvimento da aplicação.
